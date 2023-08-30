@@ -2,7 +2,17 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: ---
 Metadata: 
 
-Parameters: 
+Parameters:
+  Certificate: String
+  ComputeType: String
+  EnvironmentVariables: 
+    - EnvironmentVariable
+  Image: String
+  ImagePullCredentialsType: String
+  PrivilegedMode: Boolean
+  RegistryCredential: 
+    RegistryCredential
+  Type: String
 
 Mappings: 
 
@@ -27,8 +37,27 @@ Resources:
               - Sid: AllowUserToPassRole
                 Effect: Allow
                 Action:
+                  - 'iam:AttachGroupPolicy'
+                  - 'iam:AttachUserPolicy'
+                  - 'iam:CreatePolicy'
+                  - 'iam:ListAttachedGroupPolicies'
+                  - 'iam:ListAttachedUserPolicies'
+                  - 'iam:ListGroups'
+                  - 'iam:ListPolicies'
+                  - 'iam:ListUsers'
                   - 'iam:GetRole'
                   - 'iam:PassRole'
+                  - 'iam:AddRoleToInstanceProfile'
+                  - 'iam:AttachRolePolicy'
+                  - 'iam:CreateInstanceProfile'
+                  - 'iam:CreatePolicy'
+                  - 'iam:CreateRole'
+                  - 'iam:GetRole'
+                  - 'iam:ListAttachedRolePolicies'
+                  - 'iam:ListPolicies'
+                  - 'iam:ListRoles'
+                  - 'iam:PutRolePolicy'
+                  - 'iam:UpdateAssumeRolePolicy'
                   - 'rds:DescribeDBClusters'
                   - 'rds:DescribeDBInstances'
                   - 'redshift:DescribeClusters'
