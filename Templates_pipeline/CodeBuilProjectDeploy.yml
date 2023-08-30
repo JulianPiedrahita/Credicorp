@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: ---
+Metadata: 
+
+Parameters: 
+
+Mappings: 
+
+Conditions: 
+
+Resources: 
+  CodeBuilProjectDeployDev:
+    Type: 'AWS::CodeBuild::Project'
+    Properties:
+      Name: !Sub '${AWS::StackName}-deploy-dev'
+      ServiceRole: !GetAtt 
+        - CodeBuildServiceRole
+        - Arn
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: ./pipeline-ci-cd/deployspec.yaml
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: !Ref CodeBuildEnvironmentImage
+        EnvironmentVariables:
+          - Name: ENV_NAME
+            Value: dev
+  CodeBuilProjectDeployQa:
+    Type: 'AWS::CodeBuild::Project'
+    Properties:
+      Name: !Sub '${AWS::StackName}-deploy-qa'
+      ServiceRole: !GetAtt 
+        - CodeBuildServiceRole
+        - Arn
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: ./pipeline-ci-cd/deployspec.yaml
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: !Ref CodeBuildEnvironmentImage
+        EnvironmentVariables:
+          - Name: ENV_NAME
+            Value: qa
+  #CodeBuilProjectDeployProd:
+  #  Type: 'AWS::CodeBuild::Project'
+  #  Properties:
+  #    Name: !Sub '${AWS::StackName}-deploy-prod'
+  #    ServiceRole: !GetAtt 
+  #      - CodeBuildServiceRole
+  #      - Arn
+  #    Source:
+  #      Type: CODEPIPELINE
+  #      BuildSpec: ./pipeline-ci-cd/deployspec.yaml
+  #    Artifacts:
+  #      Type: CODEPIPELINE
+  #    Environment:
+  #      Type: LINUX_CONTAINER
+  #      ComputeType: BUILD_GENERAL1_SMALL
+  #      Image: !Ref CodeBuildEnvironmentImage
+  #      EnvironmentVariables:
+  #        - Name: ENV_NAME
+  #          Value: prod
+
+Outputs:
