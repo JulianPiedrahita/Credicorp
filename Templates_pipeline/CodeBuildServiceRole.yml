@@ -24,6 +24,27 @@ Resources:
           PolicyDocument:
             Version: 2012-10-17
             Statement:
+              - Sid: AllowUserToPassRole
+                Effect: Allow
+                Action:
+                  - 'iam:GetRole'
+                  - 'iam:PassRole'
+                  - 'rds:DescribeDBClusters'
+                  - 'rds:DescribeDBInstances'
+                  - 'redshift:DescribeClusters'
+                Resource:
+                  - 'arn:aws:iam::123456789012:role/service-role/AccessAnalyzerMonitorServiceRole*'
+              - Sid: AllowUserToGeneratePolicy
+                Effect: Allow
+                Action:
+                  - 'access-analyzer:CancelPolicyGeneration'
+                  - 'access-analyzer:GetGeneratedPolicy'
+                  - 'access-analyzer:ListPolicyGenerations'
+                  - 'access-analyzer:StartPolicyGeneration'
+                  - 'access-analyzer:ValidatePolicy'
+                  - 'access-analyzer:CreateAnalyzer'
+                Resource:
+                  - '*'    
               - Sid: CloudWatchLogsPolicy
                 Effect: Allow
                 Action:
