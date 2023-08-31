@@ -1,15 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: CI/CD pipeline for GitHub projects
-Parameters:
-  CodeBuildEnvironmentImage:
-    Type: String
-    Default: 'aws/codebuild/standard:4.0'
 Resources:
   IAM:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: s3://test-pipeliene-cloudformation/CodeBuildServiceRole.yml
-
+      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodeBuildServiceRole.yml
         
 
 
