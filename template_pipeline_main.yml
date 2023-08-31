@@ -8,7 +8,7 @@ Resources:
   IAM:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: /Templates_pipeline/CodeBuildServiceRole.yml
+      TemplateURL: Templates_pipeline/CodeBuildServiceRole.yml
 
         
 
