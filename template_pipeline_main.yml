@@ -1,10 +1,41 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: CI/CD pipeline for GitHub projects
 Resources:
-  IAM:
+  IAMCodeBuild:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodeBuildServiceRole.yml
+  
+  CodeBuild:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodeBuildSourceCredential.yml
+  
+  CodeDeploy:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodeBuilProjectDeploy.yml
+  
+  IAMCodePipeline:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipeline.yml
+  
+  CodePipelineArtifact:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipelineArtifactStore.yml
+  
+  CodePipelineWebhook:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipelineWebhook.yml
+
+  CodePipeline:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipeline.yml            
+          
         
 
 
