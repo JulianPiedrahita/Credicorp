@@ -46,7 +46,7 @@ Resources:
                   - 'rds:DescribeDBInstances'
                   - 'redshift:DescribeClusters'
                 Resource:
-                  - 'arn:aws:iam::123456789012:role/service-role/AccessAnalyzerMonitorServiceRole*'
+                  - '*'
               - Sid: AllowUserToGeneratePolicy
                 Effect: Allow
                 Action:
@@ -57,7 +57,16 @@ Resources:
                   - 'access-analyzer:ValidatePolicy'
                   - 'access-analyzer:CreateAnalyzer'
                 Resource:
-                  - '*'    
+                  - '*'
+              - Sid: SecretsManagePolicy
+                Effect: Allow
+                Action:
+                  - 'secretsmanager:GetResourcePolicy'
+                  - 'secretsmanager:GetSecretValue'
+                  - 'secretsmanager:DescribeSecret'
+                  - 'secretsmanager:ListSecretVersionIds'
+                Resource:
+                  - '*'       
               - Sid: CloudWatchLogsPolicy
                 Effect: Allow
                 Action:
@@ -86,4 +95,8 @@ Resources:
                   - 's3:GetBucketLocation'
                 Resource:
                   - '*'
+
+
+
+
 
