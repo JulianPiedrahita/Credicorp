@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: ---
-Metadata: 
+#Metadata: 
 
 Parameters:
   Certificate: String
@@ -14,9 +14,9 @@ Parameters:
     RegistryCredential
   Type: String
 
-Mappings: 
+#Mappings: 
 
-Conditions: 
+#Conditions: 
 
 Resources: 
   CodeBuildServiceRole:
@@ -103,4 +103,4 @@ Resources:
                 Resource:
                   - '*'
 
-Outputs:
+#Outputs:

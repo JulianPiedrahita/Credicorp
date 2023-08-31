@@ -5,10 +5,10 @@ Parameters:
     Type: String
     Default: 'aws/codebuild/standard:4.0'
 Resources:
-  
-
-
-
+  IAM:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: /Templates_pipeline/CodeBuildServiceRole.yml
 
         
 
