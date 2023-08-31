@@ -11,30 +11,30 @@ Resources:
     Properties:
       TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodeBuildSourceCredential.yml
   
-  CodeDeploy:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodeBuilProjectDeploy.yml
+  #CodeDeploy:
+  #  Type: AWS::CloudFormation::Stack
+  #  Properties:
+  #    TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodeBuilProjectDeploy.yml
   
-  IAMCodePipeline:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipeline.yml
+  #IAMCodePipeline:
+  #  Type: AWS::CloudFormation::Stack
+  #  Properties:
+  #    TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipeline.yml
   
-  CodePipelineArtifact:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipelineArtifactStore.yml
+  #CodePipelineArtifact:
+  #  Type: AWS::CloudFormation::Stack
+  #  Properties:
+  #    TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipelineArtifactStore.yml
   
-  CodePipelineWebhook:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipelineWebhook.yml
+  #CodePipelineWebhook:
+  #  Type: AWS::CloudFormation::Stack
+  #  Properties:
+  #    TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipelineWebhook.yml
 
-  CodePipeline:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipeline.yml            
+  #CodePipeline:
+  #  Type: AWS::CloudFormation::Stack
+  #  Properties:
+  #    TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodePipeline.yml            
           
         
 
