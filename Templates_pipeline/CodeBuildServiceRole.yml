@@ -1,22 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: ---
-#Metadata: 
 
-Parameters:
-  Certificate: String
-  ComputeType: String
-  EnvironmentVariables: 
-    - EnvironmentVariable
-  Image: String
-  ImagePullCredentialsType: String
-  PrivilegedMode: Boolean
-  RegistryCredential: 
-    RegistryCredential
-  Type: String
 
-#Mappings: 
-
-#Conditions: 
 
 Resources: 
   CodeBuildServiceRole:
@@ -103,4 +87,3 @@ Resources:
                 Resource:
                   - '*'
 
-#Outputs:

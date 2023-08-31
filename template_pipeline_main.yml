@@ -8,7 +8,7 @@ Resources:
   IAM:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://github.com/JulianPiedrahita/Credicorp/blob/main/Templates_pipeline/CodeBuildServiceRole.yml
+      TemplateURL: s3://test-pipeliene-cloudformation/CodeBuildServiceRole.yml
 
         
 
