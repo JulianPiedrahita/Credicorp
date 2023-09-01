@@ -8,6 +8,7 @@ Resources:
   
   CodeBuild:
     Type: AWS::CloudFormation::Stack
+    DependsOn: IAMCodeBuild
     Properties:
       TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodeBuildSourceCredential.yml
   
