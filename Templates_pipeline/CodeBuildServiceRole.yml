@@ -109,7 +109,7 @@ Resources:
 Outputs:
   NameCodeBuildServiceRole:
     Value: !Ref CodeBuildServiceRole
-    Export:
+    Fn::Export:
       Name: !Ref CodeBuildServiceRole
 
 
