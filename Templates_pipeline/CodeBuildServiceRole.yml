@@ -27,7 +27,6 @@ Resources:
               - Sid: AllowUserToPassRole
                 Effect: Allow
                 Action:
-
                   - 'iam:AddRoleToInstanceProfile'
                   - 'iam:AttachGroupPolicy'
                   - 'iam:AttachUserPolicy'
