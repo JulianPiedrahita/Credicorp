@@ -108,7 +108,6 @@ Resources:
                   - '*'
 Outputs:
   CodeBuildServiceRole:
-    Description: CodeBuildServiceRole
     Value: !Ref CodeBuildServiceRole
 
 
