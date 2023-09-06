@@ -97,7 +97,11 @@ Resources:
                   - 's3:GetBucketLocation'
                 Resource:
                   - '*'
-
+Outputs:
+  NameCodeBuildServiceRole:
+    Value: !Ref CodeBuildServiceRole
+    Export:
+      Name: CodeBuildServiceRole
 
 
 
