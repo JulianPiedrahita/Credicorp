@@ -101,7 +101,7 @@ Outputs:
   NameCodeBuildServiceRole:
     Value: !Ref CodeBuildServiceRole
     Export:
-      Name: CodeBuildServiceRole
+      Name: !Ref CodeBuildServiceRole
 
 
 
