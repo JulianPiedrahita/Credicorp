@@ -3,12 +3,12 @@ Description: CI/CD pipeline for GitHub projects
 Resources:
   IAMCodeBuild:
     Type: AWS::CloudFormation::Stack
-    DependsOn: IAMCodeBuild
     Properties:
       TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodeBuildServiceRole.yml
   
   CodeBuild:
     Type: AWS::CloudFormation::Stack
+    DependsOn: IAMCodeBuild
     Properties:
       TemplateURL: https://test-pipeliene-cloudformation.s3.amazonaws.com/CodeBuildSourceCredential.yml
   

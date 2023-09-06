@@ -18,35 +18,44 @@ Resources:
           PolicyDocument:
             Version: 2012-10-17
             Statement:
+              - Sid: AllowUserCloudformationPolicy
+                Effect: Allow
+                Action:
+                  - 'sts:AssumeRole'
+                Resource:
+                  - '*'
               - Sid: AllowUserToPassRole
                 Effect: Allow
                 Action:
+
+                  - 'iam:AddRoleToInstanceProfile'
                   - 'iam:AttachGroupPolicy'
                   - 'iam:AttachUserPolicy'
+                  - 'iam:AttachRolePolicy'
+                  - 'iam:CreateInstanceProfile'
                   - 'iam:CreatePolicy'
+                  - 'iam:CreateRole'
+                  - 'iam:CreatePolicy'
+                  - "iam:DetachRolePolicy"
+                  - "iam:DeleteRolePolicy"
+                  - 'iam:DeleteRole'
+                  - 'iam:GetRole'
+                  - 'iam:GetRolePolicy'
                   - 'iam:ListAttachedGroupPolicies'
                   - 'iam:ListAttachedUserPolicies'
                   - 'iam:ListGroups'
                   - 'iam:ListPolicies'
                   - 'iam:ListUsers'
-                  - 'iam:GetRole'
-                  - 'iam:PassRole'
-                  - 'iam:AddRoleToInstanceProfile'
-                  - 'iam:AttachRolePolicy'
-                  - 'iam:CreateInstanceProfile'
-                  - 'iam:CreatePolicy'
-                  - 'iam:CreateRole'
-                  - 'iam:GetRole'
                   - 'iam:ListAttachedRolePolicies'
-                  - 'iam:ListPolicies'
                   - 'iam:ListRoles'
+                  - 'iam:PassRole'
                   - 'iam:PutRolePolicy'
                   - 'iam:UpdateAssumeRolePolicy'
                   - 'rds:DescribeDBClusters'
                   - 'rds:DescribeDBInstances'
                   - 'redshift:DescribeClusters'
                 Resource:
-                  - '*'
+                  - 'arn:aws:iam::*:role/*'
               - Sid: AllowUserToGeneratePolicy
                 Effect: Allow
                 Action:
@@ -66,7 +75,7 @@ Resources:
                   - 'secretsmanager:DescribeSecret'
                   - 'secretsmanager:ListSecretVersionIds'
                   - 'secretsmanager:CreateSecret'
-                  - 'secretsmanager:ListS'
+                  - 'secretsmanager:Lists'
                 Resource:
                   - '*'       
               - Sid: CloudWatchLogsPolicy
