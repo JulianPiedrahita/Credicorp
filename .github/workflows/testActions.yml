@@ -16,10 +16,8 @@ jobs:
     - name: Connect to AWS
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        args: --acl public-read --follow-symlinks --delete --exclude '.git*/*'
-      env:
         aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
         token: ${{ secrets.TOKEN_GITHUB }}
+        aws-region: ${{ secrets.REGION }}
