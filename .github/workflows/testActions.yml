@@ -1,0 +1,26 @@
+name: S3 test actions
+
+on:
+  workflow_dispatch:
+    push:
+      branches:
+        - main
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Connect to AWS
+        uses: aws-actions/configure-aws-credential@v1
+        with:
+          role-session-name: awstestsession
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          
+      - name: test bucket
+        run: aws s3 test ./files/ s3://${{ secrets.AWS_BUCKET_NAME }} --delete
