@@ -23,7 +23,7 @@ jobs:
         aws-region: ${{ secrets.REGION }}
 
     - name: Upload Dir to S3 -source
-      run: aws s3 sync ./ s3://test-pipeliene-cloudformation/templates_pipeline-source --exclude='node_modules/' --exclude='.git/'
+      run: aws s3 sync ./ s3://test-pipeliene-cloudformation/templates_pipeline --exclude='node_modules/' --exclude='.git/'
       env:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
