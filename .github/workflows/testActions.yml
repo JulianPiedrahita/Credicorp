@@ -1,26 +1,19 @@
-name: S3 test actions
+name: Upload S3
 
 on:
-  workflow_dispatch:
-    push:
-      branches:
-        - main
-permissions:
-  id-token: write
-  contents: read
+  push:
+    branches:
+    - main
+
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-
-      - name: Connect to AWS
-        uses: aws-actions/configure-aws-credential@v1
-        with:
-          role-session-name: awstestsession
-          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
-          aws-region: ${{ secrets.AWS_REGION }}
-          
-      - name: test bucket
-        run: aws s3 test ./files/ s3://${{ secrets.AWS_BUCKET_NAME }} --delete
+    - uses: actions/checkout@master
+    - uses: JulianPiedrahita/Credicorp@master
+      with:
+        args: --acl public-read --follow-symlinks --delete --exclude '.git*/*'
+      env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
