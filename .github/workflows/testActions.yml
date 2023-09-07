@@ -9,8 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: JulianPiedrahita/Credicorp@master
+    - uses: actions/checkout@v1
+    - uses: JulianPiedrahita/Credicorp@v1
       with:
         args: --acl public-read --follow-symlinks --delete --exclude '.git*/*'
       env:
