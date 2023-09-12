@@ -8,6 +8,20 @@ Resources:
           PolicyDocument:
             Version: 2012-10-17
             Statement:
+              - Sid: ModifyBucketPolicy
+                Effect: Allow
+                Action:
+                  - 's3:GetBucketPolicy'
+                  - 's3:PutBucketPolicy'               
+                Resource:
+                  - 'arn:aws:s3:::*'
+              - Sid: AccessS3Console
+                Effect: Allow
+                Action:
+                  - 's3:GetBucketLocation'
+                  - 's3:ListAllMyBucke'               
+                Resource:
+                  - 'arn:aws:s3:::*'
               - Sid: S3GetObjectPolicy
                 Effect: Allow
                 Action:
