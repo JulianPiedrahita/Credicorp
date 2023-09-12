@@ -1,90 +1,13 @@
 AWSTemplateFormatVersion: 2010-09-09
-
-
-
 Resources: 
   CodeBuildServiceRole:
     Type: 'AWS::IAM::Role'
     Properties:
-      AssumeRolePolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: codebuild.amazonaws.com
-            Action: 'sts:AssumeRole'
       Policies:
         - PolicyName: devops
           PolicyDocument:
             Version: 2012-10-17
             Statement:
-              - Sid: AllowUserCloudformationPolicy
-                Effect: Allow
-                Action:
-                  - 'sts:AssumeRole'
-                Resource:
-                  - '*'
-              - Sid: AllowUserToPassRole
-                Effect: Allow
-                Action:
-                  - 'iam:AddRoleToInstanceProfile'
-                  - 'iam:AttachGroupPolicy'
-                  - 'iam:AttachUserPolicy'
-                  - 'iam:AttachRolePolicy'
-                  - 'iam:CreateInstanceProfile'
-                  - 'iam:CreatePolicy'
-                  - 'iam:CreateRole'
-                  - 'iam:CreatePolicy'
-                  - "iam:DetachRolePolicy"
-                  - "iam:DeleteRolePolicy"
-                  - 'iam:DeleteRole'
-                  - 'iam:GetRole'
-                  - 'iam:GetRolePolicy'
-                  - 'iam:ListAttachedGroupPolicies'
-                  - 'iam:ListAttachedUserPolicies'
-                  - 'iam:ListGroups'
-                  - 'iam:ListPolicies'
-                  - 'iam:ListUsers'
-                  - 'iam:ListAttachedRolePolicies'
-                  - 'iam:ListRoles'
-                  - 'iam:PassRole'
-                  - 'iam:PutRolePolicy'
-                  - 'iam:UpdateAssumeRolePolicy'
-                  - 'rds:DescribeDBClusters'
-                  - 'rds:DescribeDBInstances'
-                  - 'redshift:DescribeClusters'
-                Resource:
-                  - 'arn:aws:iam::*:role/*'
-              - Sid: AllowUserToGeneratePolicy
-                Effect: Allow
-                Action:
-                  - 'access-analyzer:CancelPolicyGeneration'
-                  - 'access-analyzer:GetGeneratedPolicy'
-                  - 'access-analyzer:ListPolicyGenerations'
-                  - 'access-analyzer:StartPolicyGeneration'
-                  - 'access-analyzer:ValidatePolicy'
-                  - 'access-analyzer:CreateAnalyzer'
-                Resource:
-                  - '*'
-              - Sid: SecretsManagePolicy
-                Effect: Allow
-                Action:
-                  - 'secretsmanager:GetResourcePolicy'
-                  - 'secretsmanager:GetSecretValue'
-                  - 'secretsmanager:DescribeSecret'
-                  - 'secretsmanager:ListSecretVersionIds'
-                  - 'secretsmanager:CreateSecret'
-                  - 'secretsmanager:Lists'
-                Resource:
-                  - '*'       
-              - Sid: CloudWatchLogsPolicy
-                Effect: Allow
-                Action:
-                  - 'logs:CreateLogGroup'
-                  - 'logs:CreateLogStream'
-                  - 'logs:PutLogEvents'
-                Resource:
-                  - '*'
               - Sid: S3GetObjectPolicy
                 Effect: Allow
                 Action:
