@@ -4,7 +4,7 @@ Parameters:
   GitHubOwner:
     Type: String
     AllowedPattern: '[A-Za-z0-9-]+'
-    Default: quick-refs
+    Default: JulianPiedrahita
   GitHubRepository:
     Type: String
     AllowedPattern: '[A-Za-z0-9-]+'
@@ -12,7 +12,7 @@ Parameters:
   GitHubBranch:
     Type: String
     AllowedPattern: '[A-Za-z0-9-]+'
-    Default: master
+    Default: main
   CodeBuildEnvironmentImage:
     Type: String
     Default: 'aws/codebuild/standard:4.0'
