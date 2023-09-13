@@ -1,0 +1,118 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Plantilla para un CI/CD con AWS CodePipeline y CodeBuild
+
+Parameters:
+  GitHubRepositoryName:
+    Type: String
+    Description: Nombre del repositorio de GitHub
+  GitHubBranch:
+    Type: String
+    Description: Nombre de la rama de GitHub
+  CodeBuildImage:
+    Type: String
+    Default: aws/codebuild/standard:4.0
+    Description: Imagen de CodeBuild
+
+Resources:
+  PipelineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - codepipeline.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: CodePipelinePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:GetObjectVersion
+                  - s3:GetBucketVersioning
+                  - s3:PutObject
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - codebuild:StartBuild
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - codepipeline:*
+                Resource: "*"
+
+  Pipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      Name: MyCICDPipeline
+      RoleArn: !GetAtt PipelineRole.Arn
+      ArtifactStore:
+        Type: S3
+        Location: my-cicd-artifact-bucket
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: SourceAction
+              ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Provider: GitHub
+                Version: 1
+              Configuration:
+                Owner: !Ref GitHubRepositoryName
+                Repo: !Ref GitHubRepositoryName
+                Branch: !Ref GitHubBranch
+                OAuthToken: "YOUR_GITHUB_PERSONAL_ACCESS_TOKEN"
+              OutputArtifacts:
+                - Name: SourceOutput
+              RunOrder: 1
+        - Name: Build
+          Actions:
+            - Name: BuildAction
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: 1
+              Configuration:
+                ProjectName: MyCodeBuildProject
+              InputArtifacts:
+                - Name: SourceOutput
+              RunOrder: 1
+        - Name: Deploy
+          Actions:
+            - Name: DeployAction
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Provider: CloudFormation
+                Version: 1
+              Configuration:
+                StackName: MyAppStack
+                ActionMode: CREATE_UPDATE
+                Capabilities: CAPABILITY_IAM
+                RoleArn: "YOUR_DEPLOY_ROLE_ARN"
+                TemplatePath: SourceOutput::template.yaml
+              RunOrder: 1
+
+  MyCodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: MyCodeBuildProject
+      Description: My CodeBuild Project
+      ServiceRole: !GetAtt PipelineRole.Arn
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: !Ref CodeBuildImage
+      Source:
+        Type: CODEPIPELINE
