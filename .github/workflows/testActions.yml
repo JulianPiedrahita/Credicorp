@@ -27,10 +27,8 @@ jobs:
           aws-region: ${{ secrets.REGION }}
 
       - name: Create Dir to S3 -source
-        run: aws s3 sync ./public/ s3://${{ secrets.AWS_BUCKET }}  --delete
-        env:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  
+        run: | 
+          aws s3api create-bucket --bucket ${{ secrets.AWS_BUCKET }} --region ${{ secrets.REGION }}
           
   deploy:
     needs: [build-create-s3]
