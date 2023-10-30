@@ -28,8 +28,8 @@ jobs:
 
       - name: Create Dir to S3 -source
         run: | 
-           if aws s3 mb s3://${{ vars.AWS_S3_BUCKET_TEST }}  | grep -w ${{ vars.AWS_S3_BUCKET_TEST }} >/dev/null; then
-             echo " ${{ vars.AWS_S3_BUCKET_TEST }} eexiste"
+           if s3://${{ vars.AWS_S3_BUCKET_TEST }}  | grep -w ${{ vars.AWS_S3_BUCKET_TEST }} >/dev/null; then
+             echo " ${{ vars.AWS_S3_BUCKET_TEST }} existe"
            else 
              aws s3 mb s3://${{ vars.AWS_S3_BUCKET_TEST }}
            fi
