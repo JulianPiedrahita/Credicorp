@@ -28,9 +28,12 @@ jobs:
 
       - name: Create Dir to S3 -source
         run: | 
-          aws s3 mb s3://${{ vars.AWS_S3_BUCKET_TEST }} --region ${{ secrets.REGION }} | grep -w ${{ vars.AWS_S3_BUCKET_TEST }} >/dev/null; then
- 
-          
+           if aws s3 mb s3://${{ vars.AWS_S3_BUCKET_TEST }}  | grep -w ${{ vars.AWS_S3_BUCKET_TEST }} >/dev/null; then
+             echo " ${{ vars.AWS_S3_BUCKET_TEST }} eexiste"
+           else 
+             aws s3 mb s3://${{ vars.AWS_S3_BUCKET_TEST }}
+           fi
+               
   deploy:
     needs: [build-create-s3]
     runs-on: ubuntu-latest
